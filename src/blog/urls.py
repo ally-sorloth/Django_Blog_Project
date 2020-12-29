@@ -1,5 +1,7 @@
+from os import name
 from django.urls import path
+from .views import post_list
 
-# urlpatterns = [
-#     path("", )
-# ]
+urlpatterns = [
+    path("", post_list, name="list")
+]
