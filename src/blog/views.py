@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from blog.models import Post
 from .forms import PostForm
@@ -19,4 +19,9 @@ def post_create(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
+            return redirect("blog:list")
+    context = {
+        'form': form
+    }
+    return render(request, "blog/post_create.html", context)
 # Create your views here.
