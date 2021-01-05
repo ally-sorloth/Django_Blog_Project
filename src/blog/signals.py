@@ -10,3 +10,8 @@ def pre_save_create_slug(sender, instance, **kwargs):
     if not instance.slug:
         instance.slug = slugify(
             instance.title + " " + get_random_code())
+
+
+# a = "henry forecter"
+
+# print(slugify(a)) == > henry-forester
