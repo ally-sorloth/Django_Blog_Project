@@ -1,7 +1,8 @@
-from django.http.response import HttpResponse
+# from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Post, Like
 from .forms import CommentForm, PostForm
+from django.contrib.auth.decorators import login_required
 
 
 def post_list(request):
@@ -12,10 +13,11 @@ def post_list(request):
     return render(request, "blog/post_list.html", context)
 
 
+@login_required()
 def post_create(request):
     # form = PostForm(request.POST or None, request.FILES or None)
-    if request.method == "GET":
-        form = PostForm()
+
+    form = PostForm()
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -52,6 +54,7 @@ def post_detail(request, slug):
     return render(request, "blog/post_detail.html", context)
 
 
+@login_required()
 def post_update(request, slug):
     obj = get_object_or_404(Post, slug=slug)
     form = PostForm(request.POST or None, request.FILES or None, instance=obj)
@@ -84,6 +87,7 @@ def post_delete(request, slug):
     return render(request, "blog/post_delete.html", context)
 
 
+@login_required()
 def like(request, slug):
     if request.method == "POST":
         obj = get_object_or_404(Post, slug=slug)

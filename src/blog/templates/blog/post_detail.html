@@ -35,7 +35,7 @@
             <h4>Leave a comment below</h4>
             <form action="" method="POST">
                 {% csrf_token %}
-                {{form|crispy}}
+                {{form | crispy}}
                 <button class="btn btn-secondary btn-sm mt-1 mb-1">SEND</button>
             </form>
             <hr>
