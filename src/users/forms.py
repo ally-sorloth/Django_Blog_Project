@@ -1,0 +1,17 @@
+from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.forms import fields
+
+class RegistrationForm(UserCreationForm):
+    class Mata:
+        model = User
+        fields = ("username", "email")
+        
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise  forms.ValidationError(
+                "Please use another Email, that one already taken")
+        return email
+        
