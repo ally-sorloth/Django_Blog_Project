@@ -1,3 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from .forms import RegistrationForm
+
+def register(request):
+    form = RegistrationForm(request.POST or None)
+    
+    if form.is_valid():
+        form.save(),
+        # return redirect("login")
+    context = {
+        'form' : form,
+    }
+    return render(request, "user/register.html", context)
 
 # Create your views here.

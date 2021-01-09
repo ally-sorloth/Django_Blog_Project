@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.forms import fields
 
 class RegistrationForm(UserCreationForm):
+    email = forms.EmailField()
     class Mata:
         model = User
         fields = ("username", "email")
